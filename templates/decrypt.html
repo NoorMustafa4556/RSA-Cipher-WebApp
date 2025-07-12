@@ -1,0 +1,31 @@
+{% extends "base.html" %} {% block content %} <h2>RSA Decryption Tool</h2>
+
+<div class="alert alert-info custom-alert"> <p><strong>How to Decrypt:</strong></p>
+    <ul>
+        <li>Paste the ciphertext (the comma-separated numbers you got from encryption) into the text area.</li> <li>Enter the corresponding Private Key Exponent (d) and Modulus (n).</li> <li>If you generated keys in this browser session, the private key might be pre-filled.</li> <li>Click "Decrypt Message" to reveal the original message.</li> </ul> </div>
+
+<form method="POST" action="/decrypt"> <div class="form-group"> <label for="ciphertext">Ciphertext (comma-separated numbers):</label> <textarea class="form-control" id="ciphertext" name="ciphertext" rows="4" required></textarea> </div>
+     <div class="form-row">
+        <div class="form-group col-md-6"> <label for="private_key_d">Private Key Exponent (d):</label> <input type="number" class="form-control" id="private_key_d" name="private_key_d" required> </div>
+        <div class="form-group col-md-6"> <label for="private_key_n">Private Key Modulus (n):</label> <input type="number" class="form-control" id="private_key_n" name="private_key_n" required> </div>
+     </div> <button type="submit" class="btn btn-primary btn-action">Decrypt Message</button> </form>
+<br>
+<a href="/" class="btn btn-secondary">Back to Encrypt</a> {% endblock %}
+
+{% block scripts %}
+<script>
+// On page load, try to retrieve and pre-fill private key from sessionStorage
+window.onload = function() { // [cite: 29]
+    try {
+        var priv_d = sessionStorage.getItem('private_key_d'); // [cite: 29, 30]
+        var priv_n = sessionStorage.getItem('private_key_n'); // [cite: 30]
+        if (priv_d && priv_n) { // [cite: 30]
+            document.getElementById('private_key_d').value = priv_d; // [cite: 30, 31]
+            document.getElementById('private_key_n').value = priv_n; // [cite: 31]
+        }
+    } catch (e) {
+        console.error("Could not retrieve keys from sessionStorage:", e);
+        // sessionStorage might be disabled or unavailable
+    }
+}
+</script> {% endblock %}

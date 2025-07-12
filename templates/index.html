@@ -1,0 +1,76 @@
+{% extends "base.html" %} {% block content %} <h2>RSA Encryption Tool</h2>
+
+<div class="alert alert-info custom-alert"> <p><strong>How to Encrypt:</strong></p>
+    <ul>
+        <li>Click "Generate New Keys" to create a unique RSA public/private key pair.</li> <li>Your new keys will appear below and the public key fields will auto-fill.</li> <li>The private key is stored temporarily in your browser for the Decrypt page.</li> <li>Enter the message you want to encrypt in the text area.</li> <li>Click "Encrypt Message". The result will be a series of numbers.</li> <li>Use the "Copy Key" buttons to save your keys securely if needed.</li> </ul>
+</div>
+
+<div id="keyInfo" style="display:none;" class="alert alert-secondary key-display"> <p>
+        <strong>Public Key:</strong>
+        <span id="publicKeyDisplay">(e = <span id="pub_e"></span>, n = <span id="pub_n"></span>)</span> <button class="btn btn-sm btn-copy" onclick="copyText('publicKeyDisplay', 'Public Key')">Copy Public Key</button> </p>
+    <p>
+        <strong>Private Key:</strong>
+        <span id="privateKeyDisplay">(d = <span id="priv_d"></span>, n = <span id="priv_n"></span>)</span> <button class="btn btn-sm btn-copy" onclick="copyText('privateKeyDisplay', 'Private Key')">Copy Private Key</button> </p>
+</div>
+
+<form method="POST" action="/encrypt"> <div class="form-group"> <label for="message">Your Message:</label> <textarea class="form-control" id="message" name="message" rows="4" required></textarea> </div>
+    <div class="form-row">
+        <div class="form-group col-md-6"> <label for="public_key_e">Public Key Exponent (e):</label> <input type="number" class="form-control" id="public_key_e" name="public_key_e" required> </div>
+        <div class="form-group col-md-6"> <label for="public_key_n">Public Key Modulus (n):</label> <input type="number" class="form-control" id="public_key_n" name="public_key_n" required> </div>
+    </div>
+    <button type="submit" class="btn btn-primary btn-action">Encrypt Message</button> </form>
+<br>
+<button id="generateKeyBtn" class="btn btn-secondary">Generate New Keys</button> {% endblock %}
+
+{% block scripts %}
+<script>
+// Function to copy key text to clipboard
+function copyText(elementId, keyName) { // [cite: 35]
+    var textElement = document.getElementById(elementId);
+    if (!textElement) return;
+    var text = textElement.innerText; // Get the text content [cite: 35]
+    navigator.clipboard.writeText(text) // Use the modern Clipboard API [cite: 36]
+      .then(() => { alert(keyName + " copied to clipboard!"); }) // Success feedback [cite: 36]
+      .catch(err => { alert("Could not copy " + keyName + ": " + err); }); // Error feedback [cite: 36]
+}
+
+// Event listener for the "Generate New Keys" button
+document.getElementById("generateKeyBtn").addEventListener("click", function(e) { // [cite: 37]
+    e.preventDefault(); // Prevent default button action [cite: 37]
+    // Fetch keys from the backend using AJAX
+    fetch("/generate_keys", { // [cite: 37]
+        headers: {"X-Requested-With": "XMLHttpRequest"} // Identify as AJAX request [cite: 37]
+    })
+    .then(response => response.json()) // Parse the JSON response [cite: 37]
+    .then(data => { // [cite: 37]
+        if (data.error) { // Handle errors reported by the server [cite: 37]
+            alert("Error generating keys: " + data.error); // [cite: 37]
+            return; // [cite: 37]
+        }
+        // Populate the public key input fields
+        document.getElementById("public_key_e").value = data.public_key[0]; // [cite: 37, 38]
+        document.getElementById("public_key_n").value = data.public_key[1]; // [cite: 38]
+        // Display the generated keys in the dedicated section
+        document.getElementById("pub_e").textContent = data.public_key[0]; // [cite: 38]
+        document.getElementById("pub_n").textContent = data.public_key[1]; // [cite: 38]
+        document.getElementById("priv_d").textContent = data.private_key[0]; // [cite: 38]
+        document.getElementById("priv_n").textContent = data.private_key[1]; // [cite: 38]
+        document.getElementById("keyInfo").style.display = "block"; // Show the key display area [cite: 38]
+
+        // Store the private key in sessionStorage for use on the decrypt page
+        sessionStorage.setItem('private_key_d', data.private_key[0]); // [cite: 38]
+        sessionStorage.setItem('private_key_n', data.private_key[1]); // [cite: 38]
+    })
+    .catch(error => { // Handle network or other fetch errors [cite: 39]
+        alert("An error occurred while generating keys. Check console for details."); // [cite: 39]
+        console.error("Key generation fetch error:", error); // [cite: 39]
+    });
+});
+
+// Event listener for the "Generate Keys" link in the navbar
+document.getElementById("generateKeyNav").addEventListener("click", function(e) { // [cite: 40]
+    e.preventDefault(); // Prevent default link behavior [cite: 40]
+    // Programmatically click the main "Generate New Keys" button
+    document.getElementById("generateKeyBtn").click(); // [cite: 40]
+});
+</script> {% endblock %}

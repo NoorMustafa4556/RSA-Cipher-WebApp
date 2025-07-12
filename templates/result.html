@@ -1,0 +1,5 @@
+{% extends "base.html" %} {% block content %} <h2>{{ operation }} Result</h2> <div class="alert {% if success %}alert-success{% else %}alert-danger{% endif %} result-box"> <p><strong>{{ operation }} {% if success %}Successful{% else %}Failed{% endif %}:</strong></p>
+    <p class="result-text">{{ result }}</p> </div>
+<br>
+
+<a href="/" class="btn btn-primary">Encrypt Another Message</a> <a href="/decrypt" class="btn btn-secondary">Go to Decrypt</a> {% endblock %}
