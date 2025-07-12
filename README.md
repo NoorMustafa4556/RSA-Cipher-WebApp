@@ -40,8 +40,8 @@ To get a local copy up and running, follow these simple steps.
 
 1.  **Clone the repository:**
     ```bash
-    git clone [Your-Repository-URL]
-    cd [repository-folder-name]
+    git clone https://github.com/NoorMustafa4556/RSA-Cipher-WebApp
+   
     ```
 
 2.  **Create a virtual environment (Recommended):**
