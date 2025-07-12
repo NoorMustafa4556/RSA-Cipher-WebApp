@@ -2,8 +2,7 @@
 
 This project is a web-based implementation of the RSA asymmetric encryption algorithm. It provides a user-friendly interface to generate public/private key pairs, encrypt messages with a public key, and decrypt them using the corresponding private key. The application is built with Python and Flask, demonstrating the core principles of modern cryptography in a practical, hands-on way.
 
-![Project Poster](./poster.png)
-*(You can add the poster image you shared to your repository and name it `poster.png` to display it here.)*
+
 
 ## 🔑 Key Features
 
