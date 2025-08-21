@@ -19,6 +19,7 @@ This project is a web-based implementation of the RSA asymmetric encryption algo
 -   **Frontend:** **HTML & CSS**
     -   Used to structure and style the web pages for a clean and simple user experience.
 
+
 ## 🌐 Real-World Applications
 
 The principles demonstrated in this project are the foundation for many modern security systems, including:
@@ -177,6 +178,7 @@ With a strong understanding of **UI/UX principles**, **state management**, and *
 > _“Learning never stops. Every app I build makes me a better developer — one widget at a time.”_
 
 ---
+
 
 
 
