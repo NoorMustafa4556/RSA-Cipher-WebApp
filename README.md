@@ -46,17 +46,23 @@ To get a local copy up and running, follow these simple steps.
     ```
 
 2.  **Create a virtual environment (Recommended):**
+   
+    ## For Windows
     ```bash
-    # For Windows
     python -m venv venv
+    ```
+    ```bash
     venv\Scripts\activate
-
-    # For macOS/Linux
+    ```
+    ## For macOS/Linux
+    ```bash
     python3 -m venv venv
+    ```
+    ```bash
     source venv/bin/activate
     ```
 
-3.  **Install the required packages:**
+4.  **Install the required packages:**
     You will need to install Flask. Create a `requirements.txt` file with the following content:
     ```txt
     Flask
@@ -66,18 +72,18 @@ To get a local copy up and running, follow these simple steps.
     pip install -r requirements.txt
     ```
 
-4.  **Run the Flask application:**
+5.  **Run the Flask application:**
     ```bash
     python app.py 
     ```
     (Assuming your main Python file is named `app.py`)
 
-5.  **Open in browser:**
+6.  **Open in browser:**
     Navigate to `http://127.0.0.1:5000` in your web browser to use the application.
 
 ---
 This project was developed to provide a clear and functional demonstration of the RSA encryption algorithm.
-# 👋 Hi, I'm Noor Mustafa
+#  👋🏻  Hi, I'm Noor Mustafa
 
 A passionate and results-driven **Flutter Developer** from **Bahawalpur, Pakistan**, specializing in building elegant, scalable, and high-performance cross-platform mobile applications using **Flutter** and **Dart**.
 
@@ -87,7 +93,7 @@ With a strong understanding of **UI/UX principles**, **state management**, and *
 
 ## 🚀 What I Do
 
-- 🧑‍💻 **Flutter App Development** – I build cross-platform apps for Android, iOS, and the web using Flutter.
+- 🧑🏻💻  **Flutter App Development** – I build cross-platform apps for Android, iOS, and the web using Flutter.
 - 🔗 **API Integration** – I connect apps to powerful RESTful APIs and third-party services.
 - 🎨 **UI/UX Design** – I craft responsive and animated interfaces that elevate the user experience.
 - 🔐 **Authentication & Firebase** – I implement secure login systems and integrate Firebase services.
@@ -179,6 +185,7 @@ With a strong understanding of **UI/UX principles**, **state management**, and *
 > _“Learning never stops. Every app I build makes me a better developer — one widget at a time.”_
 
 ---
+
 
 
 
